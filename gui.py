@@ -26,7 +26,6 @@ class login:
         self.message.text = "Logging in..."
         #TODO: log in here
         username = self.usernameField.text
-        self.window.windowClosing = self.goodbye
         try:
             self.window.visible = False
             self.friendsList(username)
@@ -73,15 +72,26 @@ class login:
         chatHistory = swing.JTextArea(text = "new chat instance!", editable = False, lineWrap = True, size = (300,1))
         chatHistoryPanel = swing.JPanel()
         chatHistoryPanel.add(chatHistory)
-        chatWindow.contentPane.add("North", chatHistoryPanel)
+        chatWindow.contentPane.add(chatHistoryPanel, BorderLayout.CENTER)
         
         #TODO: key listener so [return] enters text
         #TODO: more complicated than boss parroting action
         entryPanel = swing.JPanel()
         chatWindow.contentPane.add("South", entryPanel)
         entryPanel.layout = awt.BorderLayout()
-        #Must change data structure of chatHistory to hold multiple chats
+        #TODO change data structure of chatHistory to hold multiple chats
+        
+        self.field = swing.JTextField()
+        
+        
+        """
         self.field = swing.JTextArea()
+        self.field.editable = True
+        self.field.wrapStyleWord = True
+        self.field.lineWrap = True
+        self.field.text = "enter text"
+        print self.field.text
+        """
         entryPanel.add(self.field)
         entryPanel.add("East", swing.JButton("Enter Text", actionPerformed=self.enterText))
         chatWindow.pack()
@@ -94,9 +104,9 @@ class login:
     def enterText(self, event):
         #TODO: fancy server things.
         #self.chatHistory.setText(self.chatHistory.setText(self.field))
-        print self.field
+        print self.field.text
         #self.chatHistory.setText(self.chatHistory.setText("Get to work!"))
-        self.chatHistory.append(self.field.text())        
+        #self.chatHistory.append(self.field.text())
         
     def hide(self, event):
             self.chatWindow.visible = False
